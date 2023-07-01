@@ -18,7 +18,6 @@ class NewsSpiderPipeline:
 
     def process_item(self, item, spider):
         if item:
-
             item.save()
             print(f"保存：{item['source']}:{item['title']}")
             self.logger.info(f"保存：{item['source']}:{item['title']}- {item['url']}")

@@ -31,14 +31,15 @@ class CcnSpider(scrapy.Spider):
             if link.startswith("//"):
                 link = "https:" + link
             exclude = []
-            include = ["content", 'news']
-            # if not check_link(link, include, exclude):
-            #     continue
-            print(link)
-            # yield scrapy.Request(link, callback=self.parse_page, encoding="utf-8", dont_filter=True)
+            include = ["Content"]
+            if not check_link(link, include, exclude):
+                continue
+            link = "https://www.ccn.com.cn" + link
+            # print(link)
+            yield scrapy.Request(link, callback=self.parse_page, encoding="utf-8", dont_filter=True)
 
     def parse_page(self, response):
-        channel = response.xpath('//a[contains(@class, "curmbs__class")]/text()').extract_first()
+        channel = response.xpath('/html/body/div[3]/div/div[5]/div/a[2]/text()').extract_first()
         response.meta["source"] = self.source
         response.meta["channel"] = channel
         # self.logger.debug(f"频道：{channel}")

@@ -29,7 +29,6 @@ class NewsHunanSpider(scrapy.Spider):
             # 加入域名
             if "http" not in link:
                 link = response.url + link
-                print(f"link:{link}")
 
             # 每个板块的判断逻辑
             channel = ""

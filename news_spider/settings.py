@@ -132,3 +132,4 @@ ITEM_PIPELINES = {
 # HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 # LOG_LEVEL = "ERROR"
+# REDIRECT_ENABLED = False
