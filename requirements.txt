@@ -1,0 +1,7 @@
+Django==4.0.5
+gne==0.3.0
+itemadapter==0.6.0
+PyMySQL==1.0.3
+pytz==2022.1
+Scrapy==2.5.1
+scrapy_djangoitem==1.1.1
