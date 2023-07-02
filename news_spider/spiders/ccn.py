@@ -27,14 +27,15 @@ class CcnSpider(scrapy.Spider):
             except Exception as e:
                 # print(e)
                 continue
-            # 不存在返回
-            if link.startswith("//"):
-                link = "https:" + link
             exclude = []
             include = ["Content"]
             if not check_link(link, include, exclude):
                 continue
-            link = "https://www.ccn.com.cn" + link
+
+            if link.startswith("//"):
+                link = "https:" + link
+            else:
+                link = "https://www.ccn.com.cn" + link
             # print(link)
             yield scrapy.Request(link, callback=self.parse_page, encoding="utf-8", dont_filter=True)
 

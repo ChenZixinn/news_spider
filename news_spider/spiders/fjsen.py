@@ -30,7 +30,7 @@ class FjsenSpider(scrapy.Spider):
             # 不存在返回
 
             # exclude = ["index", "about","map", "china", "view", "gov", "introduce", "yc","rss", "C_Society", "WorldSociety","zhuanti","nodee"]
-            exclude = []
+            exclude = ['/tv']
             include = ["http", "htm", "content"]
             if not check_link(link, include, exclude):
                 continue

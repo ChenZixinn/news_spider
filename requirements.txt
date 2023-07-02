@@ -5,3 +5,6 @@ PyMySQL==1.0.3
 pytz==2022.1
 Scrapy==2.5.1
 scrapy_djangoitem==1.1.1
+cryptography==38.0.4
+pyopenssl==22.0.0
+schedule==1.2.0

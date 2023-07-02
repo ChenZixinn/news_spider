@@ -1,8 +1,6 @@
-import time
-
-import schedule
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
+
 
 def run_crawler():
     settings = get_project_settings()
