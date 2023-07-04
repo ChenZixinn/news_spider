@@ -54,5 +54,4 @@ class ChinadailySpider(scrapy.Spider):
             channel = "首页"
         response.meta["source"] = self.source
         response.meta["channel"] = channel
-        # self.logger.debug(f"频道：{channel}, url: {response.url}, parent:{response.meta['parent']}")
-        yield parse_detail(response)
+        yield parse_detail(response, self.crawler.redis_client)

@@ -39,8 +39,9 @@ pip install -r requirements.txt
 pip install -i https://pypi.douban.com/simple/ -r requirements.txt
 ```
 
-
 ##### 数据库设置
+
+mysql + redis
 
 /news_web/settings.py
 
@@ -51,13 +52,19 @@ DATABASES = {
         'OPTIONS': {
             'charset': 'utf8mb4',
         },
-        "NAME": "数据库名",
-        "USER": "用户",
-        "PASSWORD": "密码",
-        "HOST": "ip",
-        "POST": 3306
+        "NAME": "news_db",  # 数据库名
+        "USER": "root",  # 用户
+        "PASSWORD": "123123",  # 密码
+        "HOST": "127.0.0.1",  # ip
+        "POST": 3306  # 端口
     }
 }
+
+# Redis数据库设置
+REDIS_HOST = "127.0.0.1"  # ip
+REDIS_PORT = 6379  # 端口
+REDIS_DB_INDEX = 0
+REDIS_PASSWORD = "123123" # 密码
 ```
 
 ##### 导入数据库

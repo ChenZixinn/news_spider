@@ -48,5 +48,4 @@ class ScolSpider(scrapy.Spider):
         channel = response.xpath('//*[@id="page_head"]/ul/li[2]/a[1]/text()').extract_first()
         response.meta["source"] = self.source
         response.meta["channel"] = channel
-        # self.logger.debug(f"频道：{channel}")
-        yield parse_detail(response)
+        yield parse_detail(response, self.crawler.redis_client)

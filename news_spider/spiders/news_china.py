@@ -52,6 +52,5 @@ class NewChinaSpider(scrapy.Spider):
                 self.logger.warning(f"没找到频道：{response.url}")
         response.meta["source"] = self.source
         response.meta["channel"] = channel
-        # self.logger.debug(f"频道：{channel}, url: {response.url}")
-        yield parse_detail(response)
+        yield parse_detail(response, self.crawler.redis_client)
 

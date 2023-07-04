@@ -13,7 +13,6 @@ import django
 import os
 from datetime import datetime, timedelta, timezone
 
-
 sys.path.append(os.path.dirname(os.path.abspath('.')))
 os.environ['DJANGO_SETTINGS_MODULE'] = 'news_web.settings'  # 项目名.settings
 django.setup()
@@ -61,6 +60,12 @@ USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
 
+# Redis数据库设置
+REDIS_HOST = "127.0.0.1"
+REDIS_PORT = 6379
+REDIS_DB_INDEX = 0
+REDIS_PASSWORD = "Cat010320__"
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 # CONCURRENT_REQUESTS = 32
 
@@ -79,10 +84,12 @@ ROBOTSTXT_OBEY = False
 # TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-# DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
-# }
+DEFAULT_REQUEST_HEADERS = {
+    #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    #   'Accept-Language': 'en',
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+
+}
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
@@ -99,10 +106,11 @@ ROBOTSTXT_OBEY = False
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-# EXTENSIONS = {
-#     'scrapy.extensions.corestats.CoreStats': None,
-#     'news_spider.extensions.TestCoreStats': 0,
-# }
+EXTENSIONS = {
+    #     'scrapy.extensions.corestats.CoreStats': None,
+    #     'news_spider.extensions.TestCoreStats': 0,
+    'news_spider.extensions.redis_client_extension.RedisClientExtension': 500,
+}
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html

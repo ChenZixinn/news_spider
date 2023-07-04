@@ -51,5 +51,4 @@ class WenmingSpider(scrapy.Spider):
             self.logger.warning(f"找不到频道：{response.url}, parent = {response.meta['parent']}")
         response.meta["source"] = self.source
         response.meta["channel"] = channel
-        # self.logger.debug(f"频道：{channel}, url: {response.url}")
-        yield parse_detail(response)
+        yield parse_detail(response, self.crawler.redis_client)

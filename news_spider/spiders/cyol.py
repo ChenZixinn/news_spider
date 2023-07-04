@@ -44,5 +44,5 @@ class CyolSpider(scrapy.Spider):
         channel = response.xpath("//div[contains(@class, 'pd')]/a[2]/text()").extract_first()
         response.meta["source"] = self.source
         response.meta["channel"] = channel
-        yield parse_detail(response)
+        yield parse_detail(response, self.crawler.redis_client)
 

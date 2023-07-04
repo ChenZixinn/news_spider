@@ -93,5 +93,4 @@ class ChinanewsSpider(scrapy.Spider):
 
     def parse_page(self, response):
         response.meta["source"] = self.source
-        # self.logger.debug(f"频道：{response.meta['channel']}, url: {response.url}")
-        yield parse_detail(response)
+        yield parse_detail(response, self.crawler.redis_client)

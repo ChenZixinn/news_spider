@@ -55,7 +55,7 @@ class NewsHunanSpider(scrapy.Spider):
                 print(f"err url:{link}")
 
     def parse_page(self, response):
-        yield parse_detail(response)
+        yield parse_detail(response, self.crawler.redis_client)
 
 
 

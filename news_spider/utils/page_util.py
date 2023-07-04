@@ -8,14 +8,15 @@ from warehouse import models
 logger = logging.getLogger(__name__)
 
 
-def parse_detail(response):
+def parse_detail(response, redis_client, **kwargs):
     """
     传入页面的response，解析后返回items.news对象，response
     :param response: 页面请求结果，需要包含meta里的source来源和channel频道
+    :param redis_client: redis实例
     :return: item.news对象，请yield提交给管道
     """
-    if not models.News.objects.filter(url=response.url).first():
-
+    # 不存在证明没爬取过
+    if not redis_client.sismember('urls', response.url):
         html = response.text
         if not html:
             return None
@@ -29,14 +30,18 @@ def parse_detail(response):
         news["title"] = result["title"]
         news["content"] = result["content"]
         news['url'] = response.url
-        news['images'] = [img for img in result["images"] if "http" in img]
+        if response.meta.get("images", ""):
+            news["images"] = kwargs.get("images")
+        else:
+            news['images'] = [img for img in result["images"] if "http" in img]
         news["channel"] = response.meta["channel"]
         news["source"] = response.meta["source"]
         news["publish_time"] = result["publish_time"]
         return news
     else:
-        logger.debug(f"存在相同内容，跳过：{response.url}")
+        logger.debug(f"redis查询存在相同内容，跳过：{response.url}")
         # print(f"存在相同内容，跳过：{response.url}")
+        return None
 
 
 def check_link(link, include, exclude):
