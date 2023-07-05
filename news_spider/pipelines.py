@@ -25,10 +25,11 @@ class NewsSpiderPipeline:
     def process_item(self, item, spider):
         if item:
             # item.save()
-            spider.crawler.redis_client.sadd('urls', item["url"])
+            # spider.crawler.redis_client.sadd('urls', item["url"])
             self.item_list.append(item)
             self.logger.debug(f"保存：{item['source']}:{item['title']}- {item['url']}")
             self.count += 1
+            # self.logger.info(f"{item['source']}-> 长度{len(self.item_list)}, 第一条:{self.item_list[0]}")
             # print(f"保存：{item['title']}")
             # 一千条数据存储一次
             if len(self.item_list) >= 1000:

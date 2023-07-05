@@ -4,6 +4,9 @@ import schedule
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
 
+from news_spider.utils.init_redis import init_redis
+
+
 def run_crawler():
     settings = get_project_settings()
 
@@ -41,6 +44,7 @@ schedule.every().day.at("02:00").do(run_crawler)
 
 
 if __name__ == "__main__":
+    # init_redis()
     while True:
         schedule.run_pending()
         time.sleep(1)

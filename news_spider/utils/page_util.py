@@ -16,7 +16,8 @@ def parse_detail(response, redis_client, **kwargs):
     :return: item.news对象，请yield提交给管道
     """
     # 不存在证明没爬取过
-    if not redis_client.sismember('urls', response.url):
+    # if not redis_client.sismember('urls', response.url):
+    if not models.News.objects.filter(url=response.url):
         html = response.text
         if not html:
             return None
